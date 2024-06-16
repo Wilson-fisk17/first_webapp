@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App - Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .calculator input {
+            width: 100%;
+            height: 50px;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-align: right;
+            padding: 0 10px;
+        }
+        .calculator button {
+            width: 23%;
+            height: 50px;
+            font-size: 1.2em;
+            margin: 1%;
+        }
+        .operator {
+            background: #f9a825;
+            color: #fff;
+        }
+        .equal {
+            background: #4caf50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <button class="operator" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="deleteDigit()">DEL</button>
+        <button class="operator" onclick="appendOperator('/')">/</button>
+        <button class="operator" onclick="appendOperator('*')">*</button>
+        <button onclick="appendDigit('7')">7</button>
+        <button onclick="appendDigit('8')">8</button>
+        <button onclick="appendDigit('9')">9</button>
+        <button class="operator" onclick="appendOperator('-')">-</button>
+        <button onclick="appendDigit('4')">4</button>
+        <button onclick="appendDigit('5')">5</button>
+        <button onclick="appendDigit('6')">6</button>
+        <button class="operator" onclick="appendOperator('+')">+</button>
+        <button onclick="appendDigit('1')">1</button>
+        <button onclick="appendDigit('2')">2</button>
+        <button onclick="appendDigit('3')">3</button>
+        <button onclick="appendDigit('0')">0</button>
+        <button onclick="appendDigit('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function deleteDigit() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function appendDigit(digit) {
+            const display = document.getElementById('display');
+            display.value += digit;
+        }
+
+        function appendOperator(operator) {
+            const display = document.getElementById('display');
+            display.value += operator;
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
